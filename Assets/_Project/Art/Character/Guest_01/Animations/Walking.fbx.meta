@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 3ab691a5159929a47bde5fddfce86d7d
+guid: c01f2f18199cdf54d92cfd02f5dbc084
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 0396b952435714f4297a8b12c92691fe, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: TPose
+      name: Walking
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 62
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
