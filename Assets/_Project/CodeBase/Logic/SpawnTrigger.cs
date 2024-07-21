@@ -1,5 +1,7 @@
 ﻿using System;
 using _Project.CodeBase.Infrastructure.Factories;
+using _Project.CodeBase.Infrastructure.Services.PersistentProgress;
+using _Project.CodeBase.Infrastructure.Services.SaveLoad;
 using StarterAssets;
 using UnityEngine;
 using VContainer;
@@ -11,14 +13,18 @@ namespace _Project.CodeBase.Logic
         [SerializeField] private float timeBeforeSpawn = 3f;
         
         private IGameFactory _gameFactory;
+        private ISaveLoadService _saveLoad;
+        private IPersistentProgressService _progressService;
 
         private bool _isTimerRunning;
         private float _remainingTime;
-        
+
         [Inject]
-        public void Construct(IGameFactory gameFactory)
+        public void Construct(IGameFactory gameFactory, ISaveLoadService saveLoad, IPersistentProgressService progressService)
         {
+            _progressService = progressService;
             _gameFactory = gameFactory;
+            _saveLoad = saveLoad;
         }
 
         private void Update()
@@ -33,7 +39,7 @@ namespace _Project.CodeBase.Logic
                 {
                     _remainingTime = 0;
                     _isTimerRunning = false;
-                    _gameFactory.CreateGuest();
+                    _gameFactory.CreateGuest(_saveLoad, _progressService);
                 }
             }
         }

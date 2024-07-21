@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using _Project.CodeBase.Infrastructure.AssetsManagement;
 using _Project.CodeBase.Infrastructure.Services.PersistentProgress;
+using _Project.CodeBase.Infrastructure.Services.SaveLoad;
+using _Project.CodeBase.Logic.NPC;
 using UnityEngine;
 
 namespace _Project.CodeBase.Infrastructure.Factories
@@ -21,10 +23,11 @@ namespace _Project.CodeBase.Infrastructure.Factories
             _assetProvider = assetProvider;
         }
 
-        public void CreateGuest()
+        public void CreateGuest(ISaveLoadService saveLoadService, IPersistentProgressService progressService)
         {
             var position = GameObject.FindGameObjectWithTag(GuestSpawnPointTag).transform.position;
-            InstantiateRegistered(_assetProvider.guest, position);
+            var gameObject = InstantiateRegistered(_assetProvider.guest, position);
+            gameObject.GetComponent<NPCLife>().Construct(saveLoadService, progressService);
         }
         
         public void CreateHud() =>
