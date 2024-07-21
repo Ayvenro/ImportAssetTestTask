@@ -103,11 +103,11 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7575296880727753638}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 3ab691a5159929a47bde5fddfce86d7d, type: 3}
   m_Controller: {fileID: 9100000, guid: 48abfb438c1661344946b72225a49ebc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -181,9 +181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed29dfe1df54b0989b753333422205c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  nextWaypointDistance: 3
-  reachedEndOfPath: 0
 --- !u!114 &3756064191320476843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +193,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b2b396790c4fb08f6b57ee2718269d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5035818663685389143}
+  npcMovementController: {fileID: 3403902030549906608}

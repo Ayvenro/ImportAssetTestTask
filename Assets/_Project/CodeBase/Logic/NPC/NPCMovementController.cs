@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Pathfinding;
 
 namespace _Project.CodeBase.Logic.NPC
@@ -13,14 +14,21 @@ namespace _Project.CodeBase.Logic.NPC
 
         public Path path;
 
-        public float speed = 2;
+        private float speed = 2;
 
-        public float nextWaypointDistance = 3;
+        private float nextWaypointDistance = 3;
 
         private int currentWaypoint = 0;
 
-        public bool reachedEndOfPath;
+        private bool reachedEndOfPath;
 
+        private float _animationBlend;
+        
+        public event Action<float> OnSpeedChange;
+        public event Action<float> OnSpeedMultiplierChanged;
+        
+        public event Action OnEndofPath;
+        
         public void Awake()
         {
             _targetPosition = GameObject.FindGameObjectWithTag(GuestEndPointTag).transform;
@@ -42,6 +50,7 @@ namespace _Project.CodeBase.Logic.NPC
                     currentWaypoint++;
                 } else {
                     reachedEndOfPath = true;
+                    OnEndofPath?.Invoke();
                     break;
                 }
             } else {
@@ -51,8 +60,12 @@ namespace _Project.CodeBase.Logic.NPC
         var speedFactor = reachedEndOfPath ? Mathf.Sqrt(distanceToWaypoint/nextWaypointDistance) : 1f;
         Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         Vector3 velocity = dir * speed * speedFactor;
+        transform.rotation = Quaternion.LookRotation(velocity);
         _controller.SimpleMove(velocity);
-    }
+        _animationBlend = Mathf.Lerp(_animationBlend, speed, Time.deltaTime * speedFactor);
+        if (_animationBlend < 0.01f) _animationBlend = 0f;
+        OnSpeedMultiplierChanged?.Invoke(_animationBlend);
+         }
 
         private void OnPathComplete(Path p)
         {
