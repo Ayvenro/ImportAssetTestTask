@@ -7,10 +7,13 @@ namespace _Project.CodeBase.Infrastructure.Factories
 {
     public class GameFactory : IGameFactory
     {
+        private const string GuestSpawnPointTag = "GuestSpawnPoint";
+        
         private readonly IAssets _assets;
         private readonly AssetProvider _assetProvider;
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
+
 
         public GameFactory(IAssets assets, AssetProvider assetProvider)
         {
@@ -18,8 +21,11 @@ namespace _Project.CodeBase.Infrastructure.Factories
             _assetProvider = assetProvider;
         }
 
-        public void CreateGuest() =>
-            InstantiateRegistered(_assetProvider.guest);
+        public void CreateGuest()
+        {
+            var position = GameObject.FindGameObjectWithTag(GuestSpawnPointTag).transform.position;
+            InstantiateRegistered(_assetProvider.guest, position);
+        }
         
         public void CreateHud() =>
             InstantiateRegistered(_assetProvider.hud);

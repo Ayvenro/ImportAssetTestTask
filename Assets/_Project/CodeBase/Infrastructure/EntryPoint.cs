@@ -4,7 +4,7 @@ using _Project.CodeBase.Infrastructure.Services.PersistentProgress;
 using _Project.CodeBase.Infrastructure.Services.SaveLoad;
 using VContainer.Unity;
 
-namespace _Project.CodeBase.Infrastructure.Services
+namespace _Project.CodeBase.Infrastructure
 {
     public class EntryPoint : IStartable
     {
