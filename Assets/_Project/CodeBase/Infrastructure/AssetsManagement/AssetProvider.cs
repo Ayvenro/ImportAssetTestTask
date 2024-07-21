@@ -2,8 +2,9 @@
 
 namespace _Project.CodeBase.Infrastructure.AssetsManagement
 {
-    public class AssetProvider : MonoBehaviour
+    [CreateAssetMenu(menuName = "Settings/AssetProvider", fileName = "AssetProvider", order = 0)]
+    public class AssetProvider : ScriptableObject
     {
-        [SerializeField] public GameObject hud;
+        public GameObject hud;
     }
 }
