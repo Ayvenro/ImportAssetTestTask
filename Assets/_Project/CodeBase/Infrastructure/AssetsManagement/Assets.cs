@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using VContainer;
 
 namespace _Project.CodeBase.Infrastructure.AssetsManagement
 {
-    public class Assets : IAssets 
+    public class Assets : IAssets
     {
         public GameObject Instantiate(GameObject prefab)
         {

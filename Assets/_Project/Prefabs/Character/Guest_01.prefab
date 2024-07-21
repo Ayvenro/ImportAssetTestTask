@@ -95,6 +95,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6762038289029890721}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3ab691a5159929a47bde5fddfce86d7d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2274768573207208907}
   m_SourcePrefab: {fileID: 100100000, guid: 3ab691a5159929a47bde5fddfce86d7d, type: 3}
 --- !u!1 &7575296880727753638 stripped
 GameObject:
@@ -267,3 +271,15 @@ MonoBehaviour:
   bezierTangentLength: 0.4
   offset: 0.2
   factor: 0.1
+--- !u!114 &2274768573207208907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7575296880727753638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af972154b5a2451eb278b89ebe0ca290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
