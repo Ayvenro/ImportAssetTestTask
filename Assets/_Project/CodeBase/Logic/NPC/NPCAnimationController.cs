@@ -1,4 +1,5 @@
 ﻿using System;
+using Pathfinding;
 using UnityEngine;
 
 namespace _Project.CodeBase.Logic.NPC
@@ -6,35 +7,43 @@ namespace _Project.CodeBase.Logic.NPC
     public class NPCAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator animator;
-        [SerializeField] private NPCMovementController npcMovementController;
+        [SerializeField] private AIPath aiPath;
 
-        private int _animationIdSpeed;
-        private int _animationIdDance;
-        private int _animationIdMotionSpeed;
+        private int _animationIdIsWalking;
+        private int _animationIdIsDancing;
 
         private void Awake()
         {
             CalculateAnimateId();
-            npcMovementController.OnSpeedChange += BlendIdleWalk;
-            npcMovementController.OnSpeedMultiplierChanged += f => animator.SetFloat(_animationIdSpeed, f);
-            npcMovementController.OnEndofPath += EnableDanceAnimation;
         }
 
-        private void BlendIdleWalk(float speed)
+        private void Update()
         {
-            animator.SetFloat(_animationIdSpeed, speed);
+            if (aiPath.hasPath)
+            {
+                animator.SetBool(_animationIdIsWalking, aiPath.velocity.magnitude > 0.01f);
+            }
+
+            if (aiPath.reachedEndOfPath)
+            {
+                EnableDanceAnimation();
+            }
+        }
+
+        private void IsWalking(bool state)
+        {
+            animator.SetBool(_animationIdIsWalking, state);
         }
 
         private void EnableDanceAnimation()
         {
-            animator.SetBool(_animationIdDance, true);
+            animator.SetBool(_animationIdIsDancing, true);
         }
 
         private void CalculateAnimateId()
         {
-            _animationIdDance = Animator.StringToHash("Dance");
-            _animationIdSpeed = Animator.StringToHash("Speed");
-            _animationIdMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animationIdIsDancing = Animator.StringToHash("isDancing");
+            _animationIdIsWalking = Animator.StringToHash("isWalking");
         }
     }
 }
