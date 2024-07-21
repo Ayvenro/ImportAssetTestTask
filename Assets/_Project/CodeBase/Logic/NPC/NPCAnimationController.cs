@@ -1,6 +1,8 @@
-﻿namespace _Project.CodeBase.Logic.NPC
+﻿using UnityEngine;
+
+namespace _Project.CodeBase.Logic.NPC
 {
-    public class NPCAnimationController
+    public class NPCAnimationController : MonoBehaviour
     {
         
     }

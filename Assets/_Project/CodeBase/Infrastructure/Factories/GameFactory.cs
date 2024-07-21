@@ -17,6 +17,9 @@ namespace _Project.CodeBase.Infrastructure.Factories
             _assets = assets;
             _assetProvider = assetProvider;
         }
+
+        public void CreateGuest() =>
+            InstantiateRegistered(_assetProvider.guest);
         
         public void CreateHud() =>
             InstantiateRegistered(_assetProvider.hud);

@@ -1,4 +1,7 @@
 ﻿using _Project.CodeBase.Data;
+using _Project.CodeBase.Infrastructure.Factories;
+using _Project.CodeBase.Infrastructure.Services.PersistentProgress;
+using UnityEngine;
 
 namespace _Project.CodeBase.Infrastructure.Services.SaveLoad
 {
@@ -6,14 +9,25 @@ namespace _Project.CodeBase.Infrastructure.Services.SaveLoad
     {
         private const string ProgressKey = "Progress";
         
+        private readonly IPersistentProgressService _progressService;
+        private readonly IGameFactory _gameFactory;
+
+        public SaveLoadService(IPersistentProgressService progressService ,IGameFactory gameFactory)
+        {
+            _progressService = progressService;
+            _gameFactory = gameFactory;
+        }
+        
         public void SaveProgress()
         {
-            throw new System.NotImplementedException();
+            foreach (ISavedProgress progressWriter in _gameFactory.ProgressWriters) 
+                progressWriter.UpdateProgress(_progressService.Progress);
+            
+            PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
         }
 
-        public PlayerProgress LoadProgress()
-        {
-            throw new System.NotImplementedException();
-        }
+        public PlayerProgress LoadProgress() =>
+            PlayerPrefs.GetString(ProgressKey)?
+                .ToDeserialized<PlayerProgress>();
     }
 }

@@ -6,6 +6,7 @@ namespace _Project.CodeBase.Infrastructure.Factories
 {
     public interface IGameFactory
     {
+        void CreateGuest();
         void CreateHud();
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }

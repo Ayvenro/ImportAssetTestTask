@@ -6,12 +6,12 @@ namespace _Project.CodeBase.Infrastructure.AssetsManagement
     {
         public GameObject Instantiate(GameObject prefab)
         {
-            throw new System.NotImplementedException();
+            return Object.Instantiate(prefab);
         }
 
         public GameObject Instantiate(GameObject prefab, Vector3 at)
         {
-            throw new System.NotImplementedException();
+            return Object.Instantiate(prefab, at, Quaternion.identity);
         }
     }
 }
